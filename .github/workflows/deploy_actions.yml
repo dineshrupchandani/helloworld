@@ -16,7 +16,7 @@ jobs:
             export_default_credentials: true   
       - name: Deploy a Cloud Function v1
         run: | 
-          echo $MEMBER
+          echo "MEMBER" $MEMBER
           gcloud functions deploy hello_get --runtime python38 --trigger-http --allow-unauthenticated  
           
       - name: Deploy a Cloud Function
