@@ -17,7 +17,9 @@ jobs:
             service_account_email: sa-function@project1-277418.iam.gserviceaccount.com
       - name: Deploy a Cloud Function v1
         run: | 
-          echo "MEMBER" $MEMBER
+          echo $user
+          echo user
+          gcloud iam service-accounts add-iam-policy-binding project1-277418@appspot.gserviceaccount.com --member=user: --role=roles/iam.serviceAccountUser
           gcloud functions deploy hello_get --runtime python38 --trigger-http --allow-unauthenticated  
           
       - name: Deploy a Cloud Function
