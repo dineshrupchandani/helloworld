@@ -1,0 +1,16 @@
+name: deploy_action
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo project_id
+        run: echo "project-id" 
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+            project_id: ${{ secrets.gcp_project }}
+            service_account_key: ${{ secrets.gcp_credentials }}
+            export_default_credentials: true    
