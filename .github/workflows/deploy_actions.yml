@@ -15,11 +15,15 @@ jobs:
             service_account_key: ${{ secrets.gcp_credentials }}
             export_default_credentials: true   
             service_account_email: sa-function@project1-277418.iam.gserviceaccount.com
+      - name: checkout
+        uses: actions/checkout@v1    
+      - name: copy to bucket
+        run: gsutil cp *.txt gs://project1-277418-b1/
       - name: Deploy a Cloud Function v1
         run: | 
           echo $user
           echo user
-          gcloud iam service-accounts add-iam-policy-binding project1-277418@appspot.gserviceaccount.com --member=user: --role=roles/iam.serviceAccountUser
+          gcloud iam service-accounts add-iam-policy-binding project1-277418@appspot.gserviceaccount.com --member=sa-function@project1-277418.iam.gserviceaccount.com --role=roles/iam.serviceAccountUser
           gcloud functions deploy hello_get --runtime python38 --trigger-http --allow-unauthenticated  
           
       - name: Deploy a Cloud Function
