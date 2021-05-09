@@ -13,7 +13,10 @@ jobs:
         with:
             project_id: ${{ secrets.gcp_project }}
             service_account_key: ${{ secrets.gcp_credentials }}
-            export_default_credentials: true    
+            export_default_credentials: true   
+            run: | 
+              gcloud info
+              gsutil -v 
       - name: Deploy a Cloud Function
         id: deploy-function
         uses: google-github-actions/deploy-cloud-functions@v0.1.0
@@ -21,7 +24,6 @@ jobs:
           name: hello_get
           runtime: Python 3.7
           entry_point: hello_get
-          event_trigger_type: http
           project_id: ${{ secrets.gcp_project }}
           credentials: ${{ secrets.gcp_credentials }}      
       - name: completed deploying
