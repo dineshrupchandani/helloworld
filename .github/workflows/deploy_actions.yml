@@ -20,10 +20,10 @@ jobs:
       - name: copy to bucket
         run: gsutil cp *.txt gs://project1-277418-b1/
       - name: creating bucket
-        run: gsutil mb -b on -l us-east1 gs://project1-277418-bucket/ 
+        run: gsutil mb -b on -l us-east1 gs://project1-277418-bucket2/ 
       - name: Deploy a Cloud Function v1
         run: | 
-          echo $user
+          echo $MEMBER
           echo user
           gcloud functions deploy hello_get --runtime python38 --trigger-http --allow-unauthenticated  
           
