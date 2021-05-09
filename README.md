@@ -9,3 +9,6 @@ See:
 
 [tutorial]: https://cloud.google.com/functions/docs/quickstart
 [code]: main.py
+
+
+**************added actions**************
