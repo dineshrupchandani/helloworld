@@ -19,6 +19,8 @@ jobs:
         uses: actions/checkout@v1    
       - name: copy to bucket
         run: gsutil cp *.txt gs://project1-277418-b1/
+      - name: creating bucket
+        run: gsutil mb -b on -l us-east1 gs://project1-277418-bucket/ 
       - name: Deploy a Cloud Function v1
         run: | 
           echo $user
