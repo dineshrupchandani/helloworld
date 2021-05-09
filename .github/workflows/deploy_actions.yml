@@ -20,7 +20,8 @@ jobs:
         with:
           name: hello_get
           runtime: Python 3.7
-          project: ${{ secrets.gcp_project }}
+          entry_point: hello_get
+          project_id: ${{ secrets.gcp_project }}
           credentials: ${{ secrets.gcp_credentials }}      
       - name: completed deploying
         run: echo "deployed"
