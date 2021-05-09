@@ -14,6 +14,7 @@ jobs:
             project_id: ${{ secrets.gcp_project }}
             service_account_key: ${{ secrets.gcp_credentials }}
             export_default_credentials: true   
+            service_account_email: sa-function@project1-277418.iam.gserviceaccount.com
       - name: Deploy a Cloud Function v1
         run: | 
           echo "MEMBER" $MEMBER
