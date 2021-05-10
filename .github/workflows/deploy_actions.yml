@@ -18,24 +18,15 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1    
       - name: copy to bucket
-        run: gsutil cp *.txt gs://project1-277418-b1/
-      - name: creating bucket
-        run: gsutil mb -b on -l us-east1 gs://project1-277418-bucket4/ 
-      - name: Deploy a Cloud Function v1
-        run: | 
-          echo $MEMBER
-          echo user
-          gcloud iam service-accounts add-iam-policy-binding project1-277418@appspot.gserviceaccount.com --member=dinesh.rupchandani@gmail.com: --role=roles/iam.serviceAccountUser
-          gcloud functions deploy hello_get --runtime python38 --trigger-http --allow-unauthenticated  
-          
-      - name: Deploy a Cloud Function
-        id: deploy-function
-        uses: google-github-actions/deploy-cloud-functions@v0.1.0
-        with:
-          name: hello_get
-          runtime: Python 3.7
-          entry_point: hello_get
-          project_id: ${{ secrets.gcp_project }}
-          credentials: ${{ secrets.gcp_credentials }}      
-      - name: completed deploying
-        run: echo "deployed"
+      - name: getting account
+        run: gcloud config list account      
+      - name: activating account
+        run: gcloud auth activate-service-account sa-function@project1-277418.iam.gserviceaccount.com --key-file=SA-file.json        
+      - name: getting account
+        run: gcloud config list account
+      - name: getting files
+        run: |
+          pwd
+          ls -a     
+      - name: app-deploy
+        run: gcloud functions deploy hello_get --runtime python38 --trigger-http
